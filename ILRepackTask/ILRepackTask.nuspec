@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>ILRepackTask</id>
+    <version>1.0.1</version>
+    <title>ILRepack Task</title>
+    <authors>Eric Schultz</authors>
+    <owners>Eric Schultz</owners>
+    <releaseNotes>A T</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <licenseUrl>http://opensource.org/licenses/LGPL-3.0</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An MSBuild taks for running ILRepack as part of a build</description>
+  </metadata>
+  
+  <files>
+    <file src="bin\$configuration$\ILRepack.exe" target="build\net40\ILRepack.exe" />
+    <file src="bin\$configuration$\ILRepackTask.dll" target="build\net40\ILRepackTask.dll" />
+    <file src="bin\$configuration$\ILRepackTask.targets" target="build\net40\ILRepackTask.targets" />
+    <file src="bin\$configuration$\System.IO.Abstractions.dll" target="build\net40\System.IO.Abstractions.dll" />
+  </files>
+</package>
