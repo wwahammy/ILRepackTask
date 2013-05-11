@@ -27,6 +27,7 @@ namespace ILRepackTask
         private string m_outputFile;
         private ILRepack.Kind m_targetKind;
         private bool m_parallel = true;
+        private bool m_xmlDocumentation;
         // ReSharper restore InconsistentNaming
         public virtual string AttributeFile
         {
@@ -101,6 +102,12 @@ namespace ILRepackTask
             set { m_keyFile = BuildPath(ConvertEmptyToNull(value)); }
         }
 
+        public virtual bool XmlDocumentation
+        {
+            get { return m_xmlDocumentation; }
+            set { m_xmlDocumentation = value; }
+        }
+
         [Required]
         public virtual ITaskItem[] InputAssemblies
         {
@@ -142,6 +149,7 @@ namespace ILRepackTask
                                KeyFile = m_keyFile,
                                TargetKind = m_targetKind,
                                Parallel = m_parallel,
+                               XmlDocumentation =  m_xmlDocumentation
                            };
 
 

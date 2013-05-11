@@ -14,7 +14,7 @@
   <UsingTask AssemblyFile="ILRepackTask.dll" TaskName="ILRepackTask"/>
   <UsingTask AssemblyFile="ILRepackTask.dll" TaskName="FindAssembliesInOutputDirTask"/>
   <Target Name="RepackILFiles" AfterTargets="AfterBuild">
-    <FindAssembliesInOutputDirTask InputAssemblies="$(InputAssemblies)" OutputDir="$(SearchPath)" OutputAssemblyName="$(OutputAssembly)">
+    <FindAssembliesInOutputDirTask InputAssemblies="$(InputAssemblies)" OutputDir="$(SearchPath)" OutputAssemblyName="$(OutputAssembly)" XmlDocumentation="true">
       <Output PropertyName="ActualAssemblies" TaskParameter="AssembliesInOutputDir"/>
     </FindAssembliesInOutputDirTask>
     <ILRepackTask InputAssemblies="$(ActualAssemblies)" OutputFile="$(OutputAssembly)"/>
