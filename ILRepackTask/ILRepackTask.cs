@@ -17,7 +17,7 @@ namespace ILRepackTask
         private string m_attributeFile;
         private bool m_closed;
         private bool m_copyAttributes;
-        private bool m_debugInfo;
+        private bool m_debugInfo = true;
         private string m_excludeFile;
         private bool m_internalize;
         private string m_keyFile;
@@ -141,7 +141,7 @@ namespace ILRepackTask
                                OutputFile = m_outputFile,
                                KeyFile = m_keyFile,
                                TargetKind = m_targetKind,
-                               Parallel = m_parallel
+                               Parallel = m_parallel,
                            };
 
 
