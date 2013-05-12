@@ -149,10 +149,12 @@ namespace ILRepackTask
             return first == second;
         }
 
-        private class AssemblyDefinitionWithPath
-        {
-            public AssemblyDefinition Definition { get; set; }
-            public string Path { get; set; }
-        }
+        
+    }
+
+    internal class AssemblyDefinitionWithPath
+    {
+        public AssemblyDefinition Definition { get; set; }
+        public string Path { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ILRepackTask</id>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <title>ILRepack Task</title>
     <authors>Eric Schultz</authors>
     <owners>Eric Schultz</owners>
@@ -12,7 +12,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An MSBuild task and target for running ILRepack as part of a build. By default, the RepackILFiles target will repack the output assembly with all the other referenced assemblies copied into the output directory. The RepackILFiles target can be overridden.</description>
   </metadata>
-  
   <files>
     <file src="bin\$configuration$\ILRepack.exe" target="build\net40\ILRepack.exe" />
     <file src="bin\$configuration$\ILRepackTask.dll" target="build\net40\ILRepackTask.dll" />

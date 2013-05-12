@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FindAssembliesInOutputDirTask.cs" />
+    <Compile Include="GetMostQualifiedNamesForAssemblies.cs" />
     <Compile Include="ILRepackTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +73,5 @@
   <!--
   <Target Name="AfterBuild">
   </Target>-->
-  
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
