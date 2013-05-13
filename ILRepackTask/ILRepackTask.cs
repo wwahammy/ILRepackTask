@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using ILRepacking;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Mono.Cecil;
 
 namespace ILRepackTask
 {
@@ -19,7 +21,7 @@ namespace ILRepackTask
         private bool m_copyAttributes;
         private bool m_debugInfo = true;
         private string m_excludeFile;
-        private bool m_internalize;
+        private bool m_internalize = true;
         private string m_keyFile;
         private string[] m_libraryPath = new string[0];
         private bool m_log;
@@ -153,7 +155,7 @@ namespace ILRepackTask
                            };
 
 
-            ILMerger.SetInputAssemblies(m_assemblies.Select(a => a.ItemSpec).ToArray());
+            ILMerger.SetInputAssemblies(GetUniqueAssemblies(GetAssembliesFromFilePaths(m_assemblies.Select(a => a.ItemSpec))).ToArray());
 
             IEnumerable<string> searchPath = new[] {"."}.Concat(LibraryPath.Select(BuildPath));
 
@@ -186,5 +188,59 @@ namespace ILRepackTask
                        ? null
                        : Path.Combine(BuildEngine.ProjectFileOfTaskNode, iti);
         }
+
+
+        internal IEnumerable<string> GetUniqueAssemblies(IEnumerable<AssemblyNameReferenceWithPath> assemblies)
+        {
+            return assemblies.Distinct(new Comparer()).Select(i => i.Path);
+        }
+
+        internal IEnumerable<AssemblyNameReferenceWithPath> GetAssembliesFromFilePaths(IEnumerable<string> paths)
+        {
+            foreach (var p in paths)
+            {
+                AssemblyDefinition assmDef = null;
+                try
+                {
+                    using (var s = File.OpenRead(p))
+                    {
+                        assmDef = AssemblyDefinition.ReadAssembly(s);
+                    }
+                }
+                // ReSharper disable EmptyGeneralCatchClause
+                catch
+                // ReSharper restore EmptyGeneralCatchClause
+                {
+
+                }
+
+                if (assmDef != null)
+                {
+                    yield return new AssemblyNameReferenceWithPath { Name = assmDef.FullName, Path = p };
+                }
+            }
+        }
+
+        private class Comparer : IEqualityComparer<AssemblyNameReferenceWithPath>
+        {
+            public bool Equals(AssemblyNameReferenceWithPath x, AssemblyNameReferenceWithPath y)
+            {
+                return x.Name == y.Name;
+            }
+
+            public int GetHashCode(AssemblyNameReferenceWithPath obj)
+            {
+                return obj.Name.GetHashCode();
+            }
+        }
+
+
     }
+
+    internal class AssemblyNameReferenceWithPath
+    {
+        public string Name { get; set; }
+        public string Path { get; set; }
+    }
+
 }

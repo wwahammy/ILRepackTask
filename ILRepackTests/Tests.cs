@@ -9,6 +9,7 @@ using System.Text;
 using ILRepackTask;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Mono.Cecil;
 using Xunit;
 
 namespace ILRepackTests
@@ -21,7 +22,7 @@ namespace ILRepackTests
         public Tests()
         {
 
-
+/*
             _fileSystem =
                 CreateFileSystem(new []
                                      {
@@ -29,7 +30,7 @@ namespace ILRepackTests
                                          "Microsoft.Practices.ServiceLocation.pdb"
                                      });
 
-
+            */
         }
 
         private static MockFileSystem CreateFileSystem(IEnumerable<string> fileNames)
@@ -79,6 +80,31 @@ namespace ILRepackTests
             Assert.Contains(basicSampleTaskItem, outputs);
             Assert.Contains(serviceTaskItem, outputs);
             Assert.DoesNotContain(cSharpTaskItem, outputs);
+
+        }
+
+        [Fact]
+        private void ComparerTest()
+        {
+            var name = new AssemblyNameReferenceWithPath
+                {
+                    Name = 
+                        "Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                    Path = @"C:\1.dll"
+                };
+
+            var name1 = new AssemblyNameReferenceWithPath
+                {
+                    Name =
+                        "Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                    Path = @"C:\2.dll"
+                };
+
+            var task = new ILRepackTask.ILRepackTask();
+            var res = task.GetUniqueAssemblies(new[] {name, name1}).ToArray();
+            Assert.Equal(1, res.Length);
+
+
 
         }
         

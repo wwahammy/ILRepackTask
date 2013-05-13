@@ -19,7 +19,7 @@
       
       <SearchPath Condition="'$(SearchPath)' == ''">$(TargetDir)</SearchPath>
     </PropertyGroup>
-    <GetMostQualifiedNamesForAssemblies  Condition="'$(InputAssemblies)' == ''" AssemblyFiles="@(_ReferenceCopyLocalPaths)">
+    <GetMostQualifiedNamesForAssemblies  Condition="'$(InputAssemblies)' == ''" AssemblyFiles="@(ReferenceCopyLocalPaths)">
       <Output TaskParameter="MostQualifiedNames" ItemName="_ProjectReference"/>
     </GetMostQualifiedNamesForAssemblies>
       <PropertyGroup>
