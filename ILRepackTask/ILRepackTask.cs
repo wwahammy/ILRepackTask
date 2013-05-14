@@ -21,7 +21,7 @@ namespace ILRepackTask
         private bool m_copyAttributes;
         private bool m_debugInfo = true;
         private string m_excludeFile;
-        private bool m_internalize = true;
+        private bool m_internalize;
         private string m_keyFile;
         private string[] m_libraryPath = new string[0];
         private bool m_log;

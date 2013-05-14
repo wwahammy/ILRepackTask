@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ILRepackTask</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>ILRepack Task</title>
     <authors>Eric Schultz</authors>
     <owners>Eric Schultz</owners>
